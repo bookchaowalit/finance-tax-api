@@ -1,0 +1,64 @@
+# Tax cell: one of the ten finance services split from the retired finance_* tables (2026-10-12).
+# Tax items per year: income, VAT, withholding, property and social security.
+# Amounts are real (float) like every kit cell; cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
+cell: tax
+title: Tax
+resources:
+  tax-item:
+    filters:
+    - tax_year
+    - tax_type
+    - status
+    fields:
+      tax_year:
+        type: int
+        required: true
+        min: 2000
+      jurisdiction:
+        type: text
+        default: TH
+        max_length: 12
+      tax_type:
+        type: enum
+        values:
+        - income
+        - vat
+        - withholding
+        - property
+        - social_security
+        - other
+        required: true
+      period_start:
+        type: date
+      period_end:
+        type: date
+      amount_due:
+        type: real
+        min: 0
+      amount_paid:
+        type: real
+        min: 0
+        default: 0
+      currency:
+        type: text
+        default: THB
+        max_length: 12
+      due_date:
+        type: date
+      status:
+        type: enum
+        values:
+        - estimated
+        - open
+        - filed
+        - paid
+        - waived
+        - overdue
+        default: estimated
+      evidence_ref:
+        type: text
+      metadata:
+        type: json
+        json: object
+      notes:
+        type: text
