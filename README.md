@@ -1,5 +1,4 @@
-# tax
-
+# finance-tax-api
 The Tax cell: its own API (Railway, serverless) and its own Neon
 database, first generated from `cell.yaml` (one of the ten finance
 services split on 2026-10-12). It
@@ -8,8 +7,8 @@ HTTP with the caller's token.
 
 | | |
 |---|---|
-| API | Railway project `tax`, service `tax-api` (Serverless) |
-| Data | Neon project `tax`, database `tax` |
+| API | Railway project `finance-tax-api`, service `tax-api` (Serverless) |
+| Data | Neon project `finance-tax-api`, database `tax` |
 | Registry | solo-empire `repository-catalog/registries/online-systems.yaml` (`tax`) |
 
 ## API
