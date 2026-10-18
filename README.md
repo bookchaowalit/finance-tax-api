@@ -30,5 +30,6 @@ npm install && railway config apply && railway up --ci --service tax-api
 railway scale --service tax-api asia-southeast1-eqsg3a=1 us-east4-eqdc4a=0   # next to Neon and the platform
 ```
 
-Railway variables: `TAX_DB_MODE=hosted`, `TAX_DB_URL_API`,
+Railway variables: `SENTRY_DSN` (error reporting; unset = off, see `src/cellkit/_sentry.py`),
+`TAX_DB_MODE=hosted`, `TAX_DB_URL_API`,
 `TAX_JWT_PUBLIC_KEY_PEM`, `TAX_JWT_ISSUER`, `EMPIRE_PLATFORM_URL`.
