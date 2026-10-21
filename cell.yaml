@@ -9,6 +9,8 @@ resources:
     - tax_year
     - tax_type
     - status
+    ranges:
+    - [period_start, period_end]
     fields:
       tax_year:
         type: int
