@@ -1,6 +1,6 @@
 # Tax cell: one of the ten finance services split from the retired finance_* tables (2026-10-12).
 # Tax items per year: income, VAT, withholding, property and social security.
-# Amounts are real (float) like every kit cell; cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
+# Amounts are exact (money = numeric(19,4), decimal = numeric(30,10); SPEC-003); cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
 cell: tax
 title: Tax
 resources:
@@ -35,16 +35,15 @@ resources:
       period_end:
         type: date
       amount_due:
-        type: real
+        type: money
         min: 0
       amount_paid:
-        type: real
+        type: money
         min: 0
         default: 0
       currency:
-        type: text
+        type: currency
         default: THB
-        max_length: 12
       due_date:
         type: date
       status:

@@ -53,12 +53,12 @@ def test_amount_paid_cannot_be_negative(client, owner):
     assert create(client, owner, amount_paid=0).status_code == 201
 
 
-def test_jurisdiction_and_currency_are_at_most_12_characters(client, owner):
+def test_jurisdiction_is_at_most_12_characters_and_currency_is_iso_4217(client, owner):
     assert create(client, owner, jurisdiction="J" * 13).status_code == 422
     assert create(client, owner, currency="C" * 13).status_code == 422
+    assert create(client, owner, currency="thb").status_code == 422
     assert (
-        create(client, owner, jurisdiction="J" * 12, currency="C" * 12).status_code
-        == 201
+        create(client, owner, jurisdiction="J" * 12, currency="USD").status_code == 201
     )
 
 

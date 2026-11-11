@@ -40,14 +40,18 @@ workspace-scoped, so the same service can serve other tenants without code chang
 
 ## Capabilities and Constraints
 
+- SPEC-003: amounts are exact `money` (`numeric(19,4)`) and quantities, unit prices and rates are
+  `decimal` (`numeric(30,10)`); both are JSON strings in responses (`"1234.5600"`). Currency fields
+  are ISO 4217 codes (three upper-case letters). `scope` is a free label the workspace defines (at
+  most 64 characters, default empty).
 - `/v1/tax-items`: list (filters `tax_year`, `tax_type`, `status`; ordered by id, `order=desc`
   reverses), stats (`group_by` one of those filters), get, get-by-legacy-id, create (with
   `Idempotency-Key`), patch (with `expected_version`), delete.
 - Rules: `tax_year` (whole number, 2000 or later) and `tax_type` (income, vat, withholding,
   property, social_security, other) are required; `status` is estimated, open, filed, paid,
   waived or overdue (default estimated); `amount_due` and `amount_paid` cannot be negative and
-  `amount_paid` defaults to 0; `jurisdiction` defaults to TH and `currency` to THB (each at most
-  12 characters); `metadata` is a JSON object; unknown fields are refused.
+  `amount_paid` defaults to 0; `jurisdiction` defaults to TH (at most 12 characters) and `currency` to
+  THB (ISO 4217); `metadata` is a JSON object; unknown fields are refused.
 - `period_end` cannot be before `period_start` (422 `invalid_value` naming both fields, on create
   and on patch); either end may be left empty.
 - No uniqueness rule: several items may share a year and type (for example monthly VAT).

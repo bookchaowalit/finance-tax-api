@@ -12,7 +12,7 @@ def test_new_tax_item_defaults_to_estimated_thai_baht_with_nothing_paid(client, 
     assert item["status"] == "estimated"
     assert item["jurisdiction"] == "TH"
     assert item["currency"] == "THB"
-    assert item["amount_paid"] == 0
+    assert item["amount_paid"] == "0.0000"
     assert item["amount_due"] is None
     assert item["version"] == 1
 
@@ -30,13 +30,13 @@ def test_defaults_can_be_overridden(client, owner):
     assert item["status"] == "open"
     assert item["jurisdiction"] == "SG"
     assert item["currency"] == "SGD"
-    assert item["amount_due"] == 1200
-    assert item["amount_paid"] == 300.25
+    assert item["amount_due"] == "1200.0000"
+    assert item["amount_paid"] == "300.2500"
 
 
 def test_amounts_keep_their_decimal_value(client, owner):
     item = create(client, owner, amount_due=15432.75).json()
-    assert item["amount_due"] == 15432.75
+    assert item["amount_due"] == "15432.7500"
 
 
 def test_the_same_year_and_type_can_have_several_items(client, owner):

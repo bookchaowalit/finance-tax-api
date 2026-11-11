@@ -95,7 +95,7 @@ def test_filing_and_paying_an_item_bumps_its_version(client, owner):
     )
     assert paid.status_code == 200, paid.text
     assert paid.json()["status"] == "paid"
-    assert paid.json()["amount_paid"] == 1000
+    assert paid.json()["amount_paid"] == "1000.0000"
     assert paid.json()["version"] == 3
 
 
