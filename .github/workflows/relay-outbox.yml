@@ -7,7 +7,7 @@
 name: Relay outbox (finance events → Kafka)
 
 on:
-  # Scheduled by the jobs queue (platform-jobs-worker job `finance-relay-tax`, cron "50 * * * *" UTC).
+  # Scheduled by the jobs queue (platform-jobs-worker job `finance-relay-tax`, cron "45 * * * *" UTC).
   workflow_dispatch:
     inputs:
       source:
