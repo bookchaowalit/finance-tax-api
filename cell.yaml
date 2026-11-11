@@ -5,6 +5,8 @@ cell: tax
 title: Tax
 resources:
   tax-item:
+    # SPEC-005: reference data only in events (no amounts, names or notes).
+    graph: [tax_type, period_start, period_end, currency, due_date, status]
     filters:
     - tax_year
     - tax_type
