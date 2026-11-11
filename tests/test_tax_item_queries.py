@@ -91,7 +91,9 @@ def test_filing_and_paying_an_item_bumps_its_version(client, owner):
     filed = client.patch(path, headers=owner, json={"status": "filed"})
     assert filed.json()["version"] == 2
     paid = client.patch(
-        path, headers=owner, json={"status": "paid", "amount_paid": 1000}
+        path,
+        headers=owner,
+        json={"status": "paid", "amount_paid": 1000, "expected_version": 2},
     )
     assert paid.status_code == 200, paid.text
     assert paid.json()["status"] == "paid"
@@ -102,7 +104,11 @@ def test_filing_and_paying_an_item_bumps_its_version(client, owner):
 def test_a_patch_that_changes_nothing_keeps_the_version(client, owner):
     item = create(client, owner, status="open", amount_due=500).json()
     path = f"{TAX_ITEMS}/{item['id']}"
-    same = client.patch(path, headers=owner, json={"status": "open", "amount_due": 500})
+    same = client.patch(
+        path,
+        headers=owner,
+        json={"status": "open", "amount_due": 500, "expected_version": 1},
+    )
     assert same.status_code == 200, same.text
     assert same.json()["version"] == 1
 
