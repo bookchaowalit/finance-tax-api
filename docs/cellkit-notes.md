@@ -27,6 +27,7 @@ Commits touching `src/cellkit/` or `cell.yaml`:
 | Inline publish failure → Sentry | no: no resource has graph events, so the inline publisher never runs. The line is in the copy but inert. | — |
 | `ranges` rule | yes: `tax-item` period_start..period_end | 13e6b9d · `.venv/bin/pytest -q tests/test_tax_item_validation.py::test_a_period_cannot_end_before_it_starts` · `assert 201 == 422` |
 | Column limits / finite reals | yes: `tax-item.tax_year`, `tax-item.amount_due`, `tax-item.amount_paid` | 138a2c3 · `.venv/bin/pytest -q -k numbers_fit` · `psycopg.errors.NumericValueOutOfRange: integer out of range` |
+| Security review P3s (2026-11-11): import with `legacy_id` needs `<cell>.<resource>:admin` (it picks the id and may backdate timestamps; the owner grants it only for an import), a PDP 403 is a 403 not a 503, no `/docs`/`/redoc` pages (`/openapi.json` stays public) | yes: shared cellkit, same in all ten finance cells | `.venv/bin/pytest -q -k 'needs_admin or docs_pages or platform_refusal'` · red without the fix: 4 failed |
 
 ## Deliberately not applied
 
