@@ -50,6 +50,11 @@ jobs:
           TAX_KAFKA_CA_PEM: ${{ secrets.TAX_KAFKA_CA_PEM }}
           TAX_KAFKA_USERNAME: ${{ secrets.TAX_KAFKA_USERNAME }}
           TAX_KAFKA_PASSWORD: ${{ secrets.TAX_KAFKA_PASSWORD }}
+          # SPEC-002 signed events: the signing seed is a secret; the pinned public keys and the
+          # mode (off/report/enforce) are repository variables. Unset = unsigned, unchecked.
+          TAX_EVENT_SIGNING_KEY: ${{ secrets.TAX_EVENT_SIGNING_KEY }}
+          TAX_EVENT_KEYS: ${{ vars.TAX_EVENT_KEYS }}
+          TAX_EVENT_SIGNATURES: ${{ vars.TAX_EVENT_SIGNATURES }}
         run: |
           set +e
           .venv/bin/tax-relay > "$RUNNER_TEMP/relay.json" 2> "$RUNNER_TEMP/relay.err"
